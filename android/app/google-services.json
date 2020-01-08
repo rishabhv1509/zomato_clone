@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "51725151073",
+    "firebase_url": "https://zomato-clone-167.firebaseio.com",
+    "project_id": "zomato-clone-167",
+    "storage_bucket": "zomato-clone-167.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51725151073:android:7007541c928d1ff3653320",
+        "android_client_info": {
+          "package_name": "com.example.zomato_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51725151073-n1f5l97vf6c4on2h46oola42lnfkpri8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zomato_clone",
+            "certificate_hash": "808290bdab80ee10d8acaae4616a227ec327caa8"
+          }
+        },
+        {
+          "client_id": "51725151073-mtlk4qfnhfm8vnvgv6a2309tp6qft42m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2LTxmBf_7VAZrJ34uwzpIsvuLhvA9_6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51725151073-mtlk4qfnhfm8vnvgv6a2309tp6qft42m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
