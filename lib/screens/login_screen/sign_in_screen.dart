@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zomato_clone/screens/home_page.dart';
+import 'package:zomato_clone/screens/home_screen/home_screen.dart';
 import 'package:zomato_clone/screens/login_screen/widgets/login_screen_buttons.dart';
 import 'package:zomato_clone/screens/sign_up_screen.dart';
 import 'package:zomato_clone/services/authentication.dart';
@@ -138,9 +138,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Center(
                     child: Image.asset(
                   'assets/google_logo.png',
-                  height: 50,
-                  width: 50,
+                  height: 30,
+                  width: 30,
                 )),
+              ),
+              SizedBox(
+                height: 20,
               ),
               GestureDetector(
                 onTap: () {
@@ -153,7 +156,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 },
                 child: Text(
                   'Dont have an account, Sign Up here',
-                  style: TextStyle(color: Colors.amber),
+                  style: TextStyle(
+                      color: Colors.amber,
+                      fontSize: 14 * ThemesData.heightRatio),
                 ),
               )
             ],
@@ -187,7 +192,7 @@ class _SignInScreenState extends State<SignInScreen> {
             break;
           default:
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
         }
       });
     });

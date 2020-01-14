@@ -32,6 +32,6 @@ class CustomColors {
     800: Color.fromRGBO(237, 70, 52, .9),
     900: Color.fromRGBO(237, 70, 52, 1),
   };
-  static const BACKGROUND_COLOR = Color(0xff343B45);
-  static const INPUT_FIELD_COLOR = Color(0xff3E4750);
+  static const BACKGROUND_COLOR = Colors.white;
+  static const INPUT_FIELD_COLOR = Colors.amber;
 }

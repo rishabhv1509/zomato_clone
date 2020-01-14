@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zomato_clone/screens/home_page.dart';
+import 'package:zomato_clone/screens/home_screen/home_screen.dart';
 import 'package:zomato_clone/screens/login_screen/widgets/login_screen_buttons.dart';
 import 'package:zomato_clone/services/authentication.dart';
 import 'package:zomato_clone/utils/custom_colors.dart';
@@ -177,8 +177,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               _scaffoldKey.currentState.showSnackBar(userNameIsEmptySnackBar);
               break;
             default:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
           }
         });
       } else {

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:zomato_clone/services/base_auth.dart';
@@ -32,7 +35,6 @@ class AuthenticationService extends BaseAuth {
       FirebaseUser user = result.user;
       return user.uid;
     } catch (error) {
-      print('eror=====>${error.toString()}');
       return error.toString();
     }
   }
@@ -44,10 +46,19 @@ class AuthenticationService extends BaseAuth {
 
   @override
   Future<String> signUp(String email, String password) async {
+    final CollectionReference usersCollection =
+        Firestore.instance.collection('Users');
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+      print(user.uid);
+      await usersCollection.document(user.uid).setData({
+        'first_name': 'Hello',
+        'last_name': 'world',
+        'password': password,
+        'email_id': email
+      });
       return user.uid;
     } catch (error) {
       print(error.toString());

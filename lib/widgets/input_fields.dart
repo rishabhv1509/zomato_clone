@@ -54,7 +54,7 @@ class _InputFiledsState extends State<InputFileds> {
           Expanded(
             child: TextField(
               onChanged: widget.onChanged,
-              style: TextStyle(color: Colors.amber),
+              style: TextStyle(color: Colors.black),
               controller: widget.controller,
               obscureText: showPassword,
               decoration: InputDecoration(
@@ -63,7 +63,7 @@ class _InputFiledsState extends State<InputFileds> {
                 hintText: widget.hint,
                 icon: Image.asset(
                   widget.image,
-                  color: Colors.amber,
+                  color: Colors.black,
                   width: 24,
                   height: 24,
                 ),
@@ -80,7 +80,6 @@ class _InputFiledsState extends State<InputFileds> {
                   child: Container(
                     child: (Image.asset(
                       widget.eye,
-                      // color: CustomColors.INPUT_FIELD_COLOR,
                       width: 24,
                       height: 24,
                     )),
