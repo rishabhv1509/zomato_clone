@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zomato_clone/utils/custom_colors.dart';
+import 'package:zomato_clone/utils/themes/themes_data.dart';
 
 class InputFileds extends StatefulWidget {
   final String hint;
@@ -42,6 +43,7 @@ class _InputFiledsState extends State<InputFileds> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 50 * ThemesData.heightRatio,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border.all(color: CustomColors.INPUT_FIELD_COLOR),
