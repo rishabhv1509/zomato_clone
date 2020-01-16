@@ -35,7 +35,11 @@ end
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
-  
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Analytics'
+  pod 'GoogleSignIn'
+
   # Flutter Pod
 
   copied_flutter_dir = File.join(__dir__, 'Flutter')

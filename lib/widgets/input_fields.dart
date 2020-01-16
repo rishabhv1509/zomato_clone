@@ -9,12 +9,14 @@ class InputFileds extends StatefulWidget {
   final String eye;
   final bool isPassword;
   final Function(String) onChanged;
+  final bool isPhone;
   final TextEditingController controller;
 
   InputFileds(
       {Key key,
       this.hint,
       this.image,
+      this.isPhone = false,
       this.controller,
       this.onChanged,
       this.eye,
@@ -44,30 +46,31 @@ class _InputFiledsState extends State<InputFileds> {
   Widget build(BuildContext context) {
     return Container(
       height: 50 * ThemesData.heightRatio,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10 * ThemesData.heightRatio),
       decoration: BoxDecoration(
           border: Border.all(color: CustomColors.INPUT_FIELD_COLOR),
           borderRadius: BorderRadius.all(
-            Radius.circular(10),
+            Radius.circular(10 * ThemesData.heightRatio),
           ),
           color: CustomColors.INPUT_FIELD_COLOR),
       child: Row(
         children: <Widget>[
           Expanded(
             child: TextField(
+              keyboardType:
+                  (widget.isPhone) ? TextInputType.phone : TextInputType.text,
               onChanged: widget.onChanged,
               style: TextStyle(color: Colors.black),
               controller: widget.controller,
               obscureText: showPassword,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                // fillColor: CustomColors.INPUT_FIELD_COLOR,
                 hintText: widget.hint,
                 icon: Image.asset(
                   widget.image,
                   color: Colors.black,
-                  width: 24,
-                  height: 24,
+                  width: 24 * ThemesData.heightRatio,
+                  height: 24 * ThemesData.heightRatio,
                 ),
               ),
             ),
@@ -82,8 +85,8 @@ class _InputFiledsState extends State<InputFileds> {
                   child: Container(
                     child: (Image.asset(
                       widget.eye,
-                      width: 24,
-                      height: 24,
+                      width: 24 * ThemesData.heightRatio,
+                      height: 24 * ThemesData.heightRatio,
                     )),
                   ),
                 )

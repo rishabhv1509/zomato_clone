@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:zomato_clone/models/users.dart';
+import 'package:zomato_clone/screens/home_screen/home_screen.dart';
 import 'package:zomato_clone/services/base_auth.dart';
 
 class AuthenticationService extends BaseAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;
-
+  Users user;
   @override
   Future<FirebaseUser> getCurrentUser() async {
     FirebaseUser user = await _auth.currentUser();
@@ -27,7 +30,6 @@ class AuthenticationService extends BaseAuth {
   @override
   Future<String> signIn(String userName, String password) async {
     try {
-      print(password);
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: userName, password: password);
       FirebaseUser user = result.user;
@@ -43,20 +45,29 @@ class AuthenticationService extends BaseAuth {
   }
 
   @override
-  Future<String> signUp(String email, String password) async {
+  Future<String> signUp(String email, String password, String firstName,
+      String lastName, String phoneNumber) async {
     final CollectionReference usersCollection =
         Firestore.instance.collection('Users');
     try {
+      print(firstName);
+      print(lastName);
+      print(email);
+      print(password);
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
       print(user.uid);
       await usersCollection.document(user.uid).setData({
-        'first_name': 'Hello',
-        'last_name': 'world',
+        'first_name': firstName,
+        'last_name': lastName,
         'password': password,
-        'email_id': email
+        'email_id': email,
+        'phone_no': phoneNumber,
+        'profile_picture': ''
       });
+      // var hello = await usersCollection.document(user.uid).get();
+      // print('hello====>${hello.data}');
       return user.uid;
     } catch (error) {
       print(error.toString());
@@ -66,7 +77,7 @@ class AuthenticationService extends BaseAuth {
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  Future<String> signInWithGoogle() async {
+  Future<String> signInWithGoogle(BuildContext context) async {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
@@ -77,13 +88,36 @@ class AuthenticationService extends BaseAuth {
     );
 
     final AuthResult authResult = await _auth.signInWithCredential(credential);
-    final FirebaseUser user = authResult.user;
+    final FirebaseUser firebaseUser = authResult.user;
 
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
+    assert(!firebaseUser.isAnonymous);
+    assert(await firebaseUser.getIdToken() != null);
 
     final FirebaseUser currentUser = await _auth.currentUser();
-    assert(user.uid == currentUser.uid);
+    assert(firebaseUser.uid == currentUser.uid);
+    if (firebaseUser != null) {
+      final CollectionReference usersCollection =
+          Firestore.instance.collection('Users');
+      // // print('name=====>${firebaseUser.displayName}');
+      // await usersCollection.document(firebaseUser.uid).setData({
+      //   'first_name': firebaseUser.displayName,
+      //   'last_name': '',
+      //   // 'password': password,
+      //   // 'email_id': firebaseUser.email,
+      //   // 'phone_no': phoneNumber,
+      //   'profile_picture': firebaseUser.photoUrl
+      // });
+      var userData = await usersCollection.document(firebaseUser.uid).get();
+      user = Users.fromJson(userData.data);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(
+            user: user,
+          ),
+        ),
+      );
+    }
 
     return 'signInWithGoogle succeeded: $user';
   }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>51725151073-0mj9boaueab5e891f0fhv908495au8cr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.51725151073-0mj9boaueab5e891f0fhv908495au8cr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>51725151073-n1f5l97vf6c4on2h46oola42lnfkpri8.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAlCP7jLK8re0iQkPRDyGkkUliktNWp42s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>51725151073</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.zomatoClone</string>
+	<key>PROJECT_ID</key>
+	<string>zomato-clone-167</string>
+	<key>STORAGE_BUCKET</key>
+	<string>zomato-clone-167.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:51725151073:ios:a22fde20e4342433653320</string>
+	<key>DATABASE_URL</key>
+	<string>https://zomato-clone-167.firebaseio.com</string>
+</dict>
+</plist>

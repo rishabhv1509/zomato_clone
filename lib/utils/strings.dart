@@ -12,4 +12,8 @@ class AppStrings {
       'PlatformException(ERROR_EMAIL_ALREADY_IN_USE, The email address is already in use by another account., null)';
   static const STRING_IS_EMPTY_OR_NULL =
       'PlatformException(error, Given String is empty or null, null)';
+  static const TOO_MANY_REQUESTS =
+      'PlatformException(ERROR_TOO_MANY_REQUESTS, We have blocked all requests from this device due to unusual activity. Try again later. [ Too many unsuccessful login attempts. Please try again later. ], null)';
+  static const EMAIL_IS_BADLY_FORMATTED =
+      'PlatformException(ERROR_INVALID_EMAIL, The email address is badly formatted., null)';
 }

@@ -1,46 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:zomato_clone/models/users.dart';
 import 'package:zomato_clone/screens/login_screen/sign_in_screen.dart';
 import 'package:zomato_clone/services/authentication.dart';
 import 'package:zomato_clone/utils/images.dart';
+import 'package:zomato_clone/utils/themes/themes_data.dart';
 
 class HomeScreenDrawer extends StatelessWidget {
-  final String profilePicture;
-  final String name;
-  final String email;
+  final Users user;
 
-  HomeScreenDrawer({Key key, this.profilePicture, this.name, this.email})
-      : super(key: key);
+  HomeScreenDrawer({Key key, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('m=====>>${user.firstName}');
     return Drawer(
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-            child: Row(
+            decoration: BoxDecoration(color: Colors.amber),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CircleAvatar(
-                  child: (profilePicture != null)
-                      ? Image.network(profilePicture)
-                      : Image.asset('assets/eye.png'),
-                ),
-                Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      (name != null) ? name : 'hello',
-                      textAlign: TextAlign.left,
-                    ),
-                    Text(
-                      email,
-                      textAlign: TextAlign.left,
+                    CircleAvatar(
+                      maxRadius: 20,
+                      child: Image.network(user.profilePricture),
                     )
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 15 * ThemesData.heightRatio,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(user.firstName),
+                    SizedBox(
+                      height: 15 * ThemesData.heightRatio,
+                    ),
+                    Text(user.lastName),
+                  ],
+                ),
+                SizedBox(
+                  height: 15 * ThemesData.heightRatio,
+                ),
+                Text(user.email)
               ],
             ),
           ),
           ListTile(
-            leading: Image.asset(AssetImages.LOGOUT),
+            leading: Image.asset(
+              AssetImages.LOGOUT,
+              height: 24 * ThemesData.heightRatio,
+              width: 24 * ThemesData.widthRatio,
+            ),
             title: Text('Logout'),
             onTap: () {
               AuthenticationService _auth = AuthenticationService();

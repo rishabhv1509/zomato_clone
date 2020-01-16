@@ -4,4 +4,6 @@ class AssetImages {
   static const PASSWORD = 'assets/key.png';
   static const EYE = 'assets/eye.png';
   static const LOGOUT = 'assets/logout.png';
+  static const PHONE = 'assets/phone.png';
+  static const NAME = 'assets/name.png';
 }
