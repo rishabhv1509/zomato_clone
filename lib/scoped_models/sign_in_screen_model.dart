@@ -10,6 +10,7 @@ import 'package:zomato_clone/utils/strings.dart';
 
 class SignInModel extends Model {
   bool isEmailValid = true;
+  bool isAuthenticating = false;
   AuthenticationService authService = AuthenticationService();
   Users user;
   final invalidUserSnackBar = SnackBar(
@@ -49,18 +50,30 @@ class SignInModel extends Model {
 
   signIn(String email, String password, GlobalKey<ScaffoldState> _scaffoldKey,
       BuildContext context) {
+    isAuthenticating = true;
     authService.signIn(email, password).then((onValue) async {
       if (onValue == AppStrings.SIGN_IN_INVALID_USER_ERROR) {
         _scaffoldKey.currentState.showSnackBar(invalidUserSnackBar);
+        isAuthenticating = false;
+        notifyListeners();
       } else if (onValue == AppStrings.WRONG_PASSWORD) {
         _scaffoldKey.currentState.showSnackBar(wrongPasswordSnackBar);
+        isAuthenticating = false;
+        notifyListeners();
       } else if (onValue == AppStrings.SIGN_IN_USER_NOT_FOUND_ERROR) {
         _scaffoldKey.currentState.showSnackBar(userNotFoundSnackBar);
+        isAuthenticating = false;
+        notifyListeners();
       } else if (onValue == AppStrings.STRING_IS_EMPTY_OR_NULL) {
         _scaffoldKey.currentState.showSnackBar(userNameIsEmptySnackBar);
+        isAuthenticating = false;
+        notifyListeners();
       } else if (onValue == AppStrings.TOO_MANY_REQUESTS) {
         _scaffoldKey.currentState.showSnackBar(tooManyRequestsSnackBar);
+        isAuthenticating = false;
+        notifyListeners();
       } else {
+        isAuthenticating = false;
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -71,9 +84,11 @@ class SignInModel extends Model {
         );
       }
     });
+    notifyListeners();
   }
 
   signInWithGoogle(BuildContext context) async {
+    isAuthenticating = true;
     await authService.signInWithGoogle(context);
     FirebaseUser user = await authService.getCurrentUser();
     final CollectionReference usersCollection =
@@ -83,6 +98,7 @@ class SignInModel extends Model {
       'first_name': user.displayName,
       'profile_picture': user.photoUrl
     });
+    isAuthenticating = false;
     notifyListeners();
   }
 }

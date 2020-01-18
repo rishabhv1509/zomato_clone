@@ -12,7 +12,6 @@ class HomeScreenDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('m=====>>${user.firstName}');
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -26,7 +25,7 @@ class HomeScreenDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircleAvatar(
-                      maxRadius: 20,
+                      maxRadius: 20 * ThemesData.heightRatio,
                       child: Image.network(user.profilePricture),
                     )
                   ],

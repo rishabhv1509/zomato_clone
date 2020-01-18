@@ -107,7 +107,11 @@ class Restaurant {
     timings = json['timings'];
     averageCostForTwo = json['average_cost_for_two'];
     currency = json['currency'];
-    thumb = json['thumb'];
+    thumb =
+        // (thumb.length > 0)
+        // ?
+        json['thumb'];
+    // : 'https://image.shutterstock.com/image-vector/no-image-available-sign-internet-600w-261719003.jpg';
     userRating = json['user_rating'] != null
         ? new UserRating.fromJson(json['user_rating'])
         : null;

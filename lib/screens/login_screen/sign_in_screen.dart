@@ -26,126 +26,169 @@ class SignInScreen extends StatelessWidget {
           backgroundColor: CustomColors.BACKGROUND_COLOR,
           body: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [
+                      0.1,
+                      0.5,
+                      0.7,
+                      0.9
+                    ],
+                    colors: [
+                      Colors.amber[800],
+                      Colors.amber[700],
+                      Colors.amber[600],
+                      Colors.amber[400]
+                    ]),
+              ),
+              padding: EdgeInsets.only(
+                  left: 20 * ThemesData.widthRatio,
+                  right: 20 * ThemesData.widthRatio,
+                  top: 10 * ThemesData.heightRatio,
+                  bottom: 100 * ThemesData.heightRatio),
               child: Column(
                 children: <Widget>[
                   SizedBox(
                     height: 50,
                   ),
                   Container(
-                    height: 150,
-                    width: 150,
+                    height: 150 * ThemesData.heightRatio,
+                    width: 150 * ThemesData.widthRatio,
                     decoration: BoxDecoration(
-                        color: Colors.amber,
-                        border:
-                            Border.all(color: CustomColors.BACKGROUND_COLOR),
+                        color: Colors.white,
+                        border: Border.all(color: Colors.white),
                         shape: BoxShape.circle),
                     child: Center(
                       child: Image.asset(
                         AssetImages.LOGO,
                         // fit: BoxFit.contain,
-                        height: 100,
-                        width: 100,
+                        height: 100 * ThemesData.heightRatio,
+                        width: 100 * ThemesData.widthRatio,
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 80,
+                    height: 50 * ThemesData.heightRatio,
                   ),
-                  InputFileds(
-                    onChanged: (email) {
-                      model.validateEmail(email);
-                    },
-                    controller: userNameController,
-                    hint: 'Email',
-                    image: AssetImages.EMAIL,
-                    isObscured: false,
-                    isPassword: false,
-                  ),
-                  (!model.isEmailValid)
-                      ? SizedBox(
-                          height: 10,
-                        )
-                      : Container(),
-                  (!model.isEmailValid)
-                      ? Text(
-                          AppStrings.EMAIL_VERIFICATION_ERROR,
-                          style: ThemesData.emailErrorStyle(),
-                        )
-                      : Container(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  InputFileds(
-                    controller: passwordController,
-                    hint: 'Password',
-                    image: AssetImages.PASSWORD,
-                    isObscured: true,
-                    isPassword: true,
-                    eye: AssetImages.EYE,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      GestureDetector(
-                        child: Text('Forgot Password'),
-                        onTap: () {},
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Expanded(
-                        child: LoginScreenButton(
-                          label: AppStrings.SIGN_IN,
-                          onPressed: () {
-                            model.signIn(userNameController.text,
-                                passwordController.text, _scaffoldKey, context);
-                          },
-                        ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      model.signInWithGoogle(context);
-                    },
-                    child: Center(
-                        child: Image.asset(
-                      'assets/google_logo.png',
-                      height: 30,
-                      width: 30,
-                    )),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUpScreen(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Dont have an account, Sign Up here',
-                      style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 14 * ThemesData.heightRatio),
                     ),
-                  )
+                    color: Colors.white,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: 10 * ThemesData.widthRatio,
+                          right: 10 * ThemesData.widthRatio,
+                          top: 25 * ThemesData.heightRatio,
+                          bottom: 15 * ThemesData.heightRatio),
+                      child: Column(
+                        children: <Widget>[
+                          InputFileds(
+                            onChanged: (email) {
+                              model.validateEmail(email);
+                            },
+                            controller: userNameController,
+                            hint: AppStrings.EMAIL,
+                            image: AssetImages.EMAIL,
+                            isObscured: false,
+                            isPassword: false,
+                          ),
+                          (!model.isEmailValid)
+                              ? SizedBox(
+                                  height: 10 * ThemesData.heightRatio,
+                                )
+                              : Container(),
+                          (!model.isEmailValid)
+                              ? Text(
+                                  AppStrings.EMAIL_VERIFICATION_ERROR,
+                                  style: ThemesData.emailErrorStyle(),
+                                )
+                              : Container(),
+                          SizedBox(
+                            height: 20 * ThemesData.heightRatio,
+                          ),
+                          InputFileds(
+                            controller: passwordController,
+                            hint: AppStrings.PASSWORD,
+                            image: AssetImages.PASSWORD,
+                            isObscured: true,
+                            isPassword: true,
+                            eye: AssetImages.EYE,
+                          ),
+                          SizedBox(
+                            height: 20 * ThemesData.heightRatio,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              (!model.isAuthenticating)
+                                  ? Expanded(
+                                      child: LoginScreenButton(
+                                        label: AppStrings.SIGN_IN,
+                                        onPressed: () {
+                                          model.signIn(
+                                              userNameController.text,
+                                              passwordController.text,
+                                              _scaffoldKey,
+                                              context);
+                                        },
+                                      ),
+                                    )
+                                  : CircularProgressIndicator(),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10 * ThemesData.heightRatio,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              GestureDetector(
+                                child: Text(AppStrings.FORGOT_PASSWORD),
+                                onTap: () {},
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20 * ThemesData.heightRatio,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              model.signInWithGoogle(context);
+                            },
+                            child: Center(
+                                child: Image.asset(
+                              'assets/google_logo.png',
+                              height: 30 * ThemesData.heightRatio,
+                              width: 30 * ThemesData.widthRatio,
+                            )),
+                          ),
+                          SizedBox(
+                            height: 20 * ThemesData.heightRatio,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpScreen(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              AppStrings.SIGN_UP_PROMPT,
+                              style: ThemesData.signUpPromptStyle(),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    elevation: 10 * ThemesData.heightRatio,
+                  ),
                 ],
               ),
             ),

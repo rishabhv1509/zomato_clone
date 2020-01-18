@@ -11,10 +11,11 @@ class LoginScreenButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70 * ThemesData.heightRatio,
-      padding: EdgeInsets.all(10),
+      height: 75 * ThemesData.heightRatio,
+      padding: EdgeInsets.all(10 * ThemesData.heightRatio),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(30)),
+        borderRadius:
+            BorderRadius.all(Radius.circular(30 * ThemesData.heightRatio)),
         child: RaisedButton(
           color: Colors.amber,
           onPressed: onPressed,

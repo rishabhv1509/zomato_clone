@@ -50,14 +50,9 @@ class AuthenticationService extends BaseAuth {
     final CollectionReference usersCollection =
         Firestore.instance.collection('Users');
     try {
-      print(firstName);
-      print(lastName);
-      print(email);
-      print(password);
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      print(user.uid);
       await usersCollection.document(user.uid).setData({
         'first_name': firstName,
         'last_name': lastName,
@@ -66,11 +61,9 @@ class AuthenticationService extends BaseAuth {
         'phone_no': phoneNumber,
         'profile_picture': ''
       });
-      // var hello = await usersCollection.document(user.uid).get();
-      // print('hello====>${hello.data}');
+
       return user.uid;
     } catch (error) {
-      print(error.toString());
       return error.toString();
     }
   }
@@ -98,15 +91,7 @@ class AuthenticationService extends BaseAuth {
     if (firebaseUser != null) {
       final CollectionReference usersCollection =
           Firestore.instance.collection('Users');
-      // // print('name=====>${firebaseUser.displayName}');
-      // await usersCollection.document(firebaseUser.uid).setData({
-      //   'first_name': firebaseUser.displayName,
-      //   'last_name': '',
-      //   // 'password': password,
-      //   // 'email_id': firebaseUser.email,
-      //   // 'phone_no': phoneNumber,
-      //   'profile_picture': firebaseUser.photoUrl
-      // });
+
       var userData = await usersCollection.document(firebaseUser.uid).get();
       user = Users.fromJson(userData.data);
       Navigator.push(
@@ -124,7 +109,5 @@ class AuthenticationService extends BaseAuth {
 
   void signOutGoogle() async {
     await googleSignIn.signOut();
-
-    print("User Sign Out");
   }
 }

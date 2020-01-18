@@ -15,7 +15,7 @@ class SignUpModel extends Model {
   AuthenticationService authService = AuthenticationService();
   Users user;
   final passwordMismatchSnackbar = SnackBar(
-    content: Text('Password do not match, please make sure passwords match'),
+    content: Text('Passwords do not match, please make sure passwords match'),
     duration: Duration(seconds: 2),
   );
   final userNameIsEmptySnackBar = SnackBar(
@@ -23,7 +23,7 @@ class SignUpModel extends Model {
     duration: Duration(seconds: 2),
   );
   final userAlreadyExistsSnackBar = SnackBar(
-    content: Text('Email alredy exists, please Sign In'),
+    content: Text('Email already exists, please Sign In'),
     duration: Duration(seconds: 2),
   );
   final badlyFormattedEmail = SnackBar(
@@ -70,7 +70,6 @@ class SignUpModel extends Model {
       authService
           .signUp(email, password, firstName, lastName, phoneNumber)
           .then((onValue) async {
-        // FirebaseUser user = await authService.getCurrentUser();
         if (onValue == AppStrings.USER_ALREADY_EXISTS) {
           _scaffoldKey.currentState.showSnackBar(userAlreadyExistsSnackBar);
         } else if (onValue == AppStrings.STRING_IS_EMPTY_OR_NULL) {

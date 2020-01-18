@@ -45,8 +45,12 @@ class _InputFiledsState extends State<InputFileds> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50 * ThemesData.heightRatio,
-      padding: EdgeInsets.all(10 * ThemesData.heightRatio),
+      height: 40 * ThemesData.heightRatio,
+      padding: EdgeInsets.only(
+          top: 5 * ThemesData.heightRatio,
+          left: 10 * ThemesData.widthRatio,
+          bottom: 3 * ThemesData.heightRatio,
+          right: 10 * ThemesData.widthRatio),
       decoration: BoxDecoration(
           border: Border.all(color: CustomColors.INPUT_FIELD_COLOR),
           borderRadius: BorderRadius.all(
@@ -56,21 +60,27 @@ class _InputFiledsState extends State<InputFileds> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: TextField(
-              keyboardType:
-                  (widget.isPhone) ? TextInputType.phone : TextInputType.text,
-              onChanged: widget.onChanged,
-              style: TextStyle(color: Colors.black),
-              controller: widget.controller,
-              obscureText: showPassword,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: widget.hint,
-                icon: Image.asset(
-                  widget.image,
-                  color: Colors.black,
-                  width: 24 * ThemesData.heightRatio,
-                  height: 24 * ThemesData.heightRatio,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 0.0),
+              child: Center(
+                child: TextField(
+                  keyboardType: (widget.isPhone)
+                      ? TextInputType.phone
+                      : TextInputType.text,
+                  onChanged: widget.onChanged,
+                  style: TextStyle(color: Colors.black),
+                  controller: widget.controller,
+                  obscureText: showPassword,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: widget.hint,
+                    icon: Image.asset(
+                      widget.image,
+                      color: Colors.black,
+                      width: 24 * ThemesData.heightRatio,
+                      height: 24 * ThemesData.heightRatio,
+                    ),
+                  ),
                 ),
               ),
             ),

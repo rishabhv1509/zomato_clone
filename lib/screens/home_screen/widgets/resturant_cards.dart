@@ -23,10 +23,14 @@ class ResturantCards extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(left: 5.0, right: 5, top: 3, bottom: 3),
+        padding: EdgeInsets.only(
+            left: 5.0 * ThemesData.widthRatio,
+            right: 5 * ThemesData.widthRatio,
+            top: 3 * ThemesData.heightRatio,
+            bottom: 3 * ThemesData.heightRatio),
         child: Card(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0 * ThemesData.heightRatio),
             child: Row(
               children: <Widget>[
                 Container(
@@ -40,7 +44,7 @@ class ResturantCards extends StatelessWidget {
                       ),
                     ),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(10),
+                      Radius.circular(10 * ThemesData.heightRatio),
                     ),
                   ),
                   height: 50 * ThemesData.heightRatio,
@@ -59,8 +63,10 @@ class ResturantCards extends StatelessWidget {
                                 restaurant.name,
                                 style: ThemesData.restaurantNameStyle(),
                               ),
-                              padding:
-                                  EdgeInsets.only(left: 10, top: 3, bottom: 3),
+                              padding: EdgeInsets.only(
+                                  left: 10 * ThemesData.widthRatio,
+                                  top: 3 * ThemesData.heightRatio,
+                                  bottom: 3 * ThemesData.heightRatio),
                             ),
                           ),
                           Container(
@@ -68,7 +74,7 @@ class ResturantCards extends StatelessWidget {
                               border: Border.all(color: Colors.transparent),
                               color: Color(ratingColorValue),
                               borderRadius: BorderRadius.all(
-                                Radius.circular(3),
+                                Radius.circular(3 * ThemesData.heightRatio),
                               ),
                             ),
                             child: Center(
@@ -78,34 +84,38 @@ class ResturantCards extends StatelessWidget {
                                 style: ThemesData.restaurantRatingStyle(),
                               ),
                             ),
-                            padding: EdgeInsets.all(4),
+                            padding: EdgeInsets.all(4 * ThemesData.heightRatio),
                           )
                         ],
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 5 * ThemesData.heightRatio,
                       ),
                       Row(
                         children: <Widget>[
                           Expanded(
                             child: Container(
-                              padding:
-                                  EdgeInsets.only(left: 10, top: 3, bottom: 3),
+                              padding: EdgeInsets.only(
+                                  left: 10 * ThemesData.widthRatio,
+                                  top: 3 * ThemesData.heightRatio,
+                                  bottom: 3 * ThemesData.heightRatio),
                               child: Text(restaurant.cuisines),
                             ),
                           )
                         ],
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 5 * ThemesData.heightRatio,
                       ),
                       Row(
                         children: <Widget>[
                           Container(
                             child: Text(
                                 '${restaurant.currency} ${restaurant.averageCostForTwo.toString()} per person'),
-                            padding:
-                                EdgeInsets.only(left: 10, top: 3, bottom: 3),
+                            padding: EdgeInsets.only(
+                                left: 10 * ThemesData.widthRatio,
+                                top: 3 * ThemesData.heightRatio,
+                                bottom: 3 * ThemesData.heightRatio),
                           ),
                         ],
                       ),
