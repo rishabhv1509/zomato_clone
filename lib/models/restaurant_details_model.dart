@@ -1,4 +1,4 @@
-class RestaurantDetails {
+class RestaurantDetailsModel {
   String id;
   String name;
   String url;
@@ -17,7 +17,7 @@ class RestaurantDetails {
   List<Photos> photos;
   List<AllReviews> allReviews;
 
-  RestaurantDetails(
+  RestaurantDetailsModel(
       {this.id,
       this.name,
       this.url,
@@ -36,7 +36,7 @@ class RestaurantDetails {
       this.photos,
       this.allReviews});
 
-  RestaurantDetails.fromJson(Map<String, dynamic> json) {
+  RestaurantDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     url = json['url'];

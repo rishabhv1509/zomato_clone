@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zomato_clone/models/restaurant_list.dart';
-import 'package:zomato_clone/screens/restaurant_details.dart';
+import 'package:zomato_clone/screens/restaurant_details/restaurant_details.dart';
 import 'package:zomato_clone/utils/themes/themes_data.dart';
 
 class ResturantCards extends StatelessWidget {
@@ -11,15 +11,12 @@ class ResturantCards extends StatelessWidget {
   Widget build(BuildContext context) {
     int ratingColorValue =
         int.parse('0xff${restaurant.userRating.ratingColor}');
+    // print(restaurant.photosUrl);
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => RestaurantDetails(
-              id: int.parse(restaurant.id),
-            ),
-          ),
+          navigateToDetails(),
         );
       },
       child: Padding(
@@ -99,7 +96,10 @@ class ResturantCards extends StatelessWidget {
                                   left: 10 * ThemesData.widthRatio,
                                   top: 3 * ThemesData.heightRatio,
                                   bottom: 3 * ThemesData.heightRatio),
-                              child: Text(restaurant.cuisines),
+                              child: Text(
+                                restaurant.cuisines,
+                                style: ThemesData.restaurantCuisineStyle(),
+                              ),
                             ),
                           )
                         ],
@@ -111,7 +111,9 @@ class ResturantCards extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             child: Text(
-                                '${restaurant.currency} ${restaurant.averageCostForTwo.toString()} per person'),
+                              '${restaurant.currency} ${restaurant.averageCostForTwo.toString()} per person',
+                              style: ThemesData.restaurantCostStyle(),
+                            ),
                             padding: EdgeInsets.only(
                                 left: 10 * ThemesData.widthRatio,
                                 top: 3 * ThemesData.heightRatio,
@@ -127,6 +129,29 @@ class ResturantCards extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Route navigateToDetails() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          RestaurantDetails(
+        restaurant: restaurant,
+      ),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 4.0);
+        var end = Offset.zero;
+        var curve = Curves.fastLinearToSlowEaseIn;
+        // easeOutCubic
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }

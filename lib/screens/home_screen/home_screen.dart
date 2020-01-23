@@ -66,8 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             alignment: Alignment.topLeft,
                             child: Text(
                               AppStrings.HOME_SCREEN_HEADING,
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w900),
+                              style: ThemesData.homeScreenHeadingStyle(),
                             ),
                           ),
                           SizedBox(
@@ -135,9 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             alignment: Alignment.topLeft,
                             child: Text(
                               'Restaurants in ${model.currentLocation}',
-                              style: TextStyle(
-                                  fontSize: 14 * ThemesData.widthRatio,
-                                  fontWeight: FontWeight.w900),
+                              style: ThemesData.homeScreenHeadingStyle(),
                             ),
                           ),
                           SizedBox(

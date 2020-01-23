@@ -10,6 +10,7 @@ class ApiCalls {
           'https://developers.zomato.com/api/v2.1/search?entity_id=$location&entity_type=city';
       http.Response restaurantList =
           await http.get(url, headers: {'user-key': zomatoApiKey});
+
       return restaurantList;
     } catch (error) {
       return error;
@@ -22,6 +23,7 @@ class ApiCalls {
           'https://developers.zomato.com/api/v2.1/restaurant?res_id=$id';
       http.Response restaurantDetails =
           await http.get(url, headers: {'user-key': zomatoApiKey});
+      // print('details=========>${restaurantDetails.body}');
       return restaurantDetails;
     } catch (error) {
       return error;

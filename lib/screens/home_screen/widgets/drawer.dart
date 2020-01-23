@@ -3,6 +3,7 @@ import 'package:zomato_clone/models/users.dart';
 import 'package:zomato_clone/screens/login_screen/sign_in_screen.dart';
 import 'package:zomato_clone/services/authentication.dart';
 import 'package:zomato_clone/utils/images.dart';
+import 'package:zomato_clone/utils/strings.dart';
 import 'package:zomato_clone/utils/themes/themes_data.dart';
 
 class HomeScreenDrawer extends StatelessWidget {
@@ -56,7 +57,22 @@ class HomeScreenDrawer extends StatelessWidget {
               height: 24 * ThemesData.heightRatio,
               width: 24 * ThemesData.widthRatio,
             ),
-            title: Text('Logout'),
+            title: Text(AppStrings.LOGOUT),
+            onTap: () {
+              AuthenticationService _auth = AuthenticationService();
+              _auth.signOut().whenComplete(() {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()));
+              });
+            },
+          ),
+          ListTile(
+            leading: Image.asset(
+              AssetImages.ORDERS,
+              height: 24 * ThemesData.heightRatio,
+              width: 24 * ThemesData.widthRatio,
+            ),
+            title: Text(AppStrings.MY_ORDERS),
             onTap: () {
               AuthenticationService _auth = AuthenticationService();
               _auth.signOut().whenComplete(() {

@@ -21,7 +21,6 @@ class HomeScreenModel extends Model {
   TrendingRestaurantList trendingRestaurantList;
   getCurrentLocation() async {
     currentLocation = await locationService.getLocation();
-    print(currentLocation);
     notifyListeners();
   }
 
@@ -35,6 +34,10 @@ class HomeScreenModel extends Model {
     FirebaseUser firebaseUser = await _auth.getCurrentUser();
     final CollectionReference usersCollection =
         Firestore.instance.collection('Users');
+    print(
+        // 'usersCollection=====>${
+        usersCollection.getDocuments().then((onValue) => print));
+    // }');
     var userData = await usersCollection.document(firebaseUser.uid).get();
     user = Users.fromJson(userData.data);
     notifyListeners();

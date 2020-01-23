@@ -2,6 +2,7 @@ class AppStrings {
   static const EMAIL_VERIFICATION_ERROR = 'Please enter a valid E-Mail';
   static const SIGN_IN = 'Sign In';
   static const SIGN_UP = 'Sign Up';
+  static const LOGOUT = 'Logout';
   static const APP_NAME = 'Zomato Clone';
   static const HOME_SCREEN_HEADING = 'Trending Retaurant Photos';
   static const EMAIL = 'Email';
@@ -13,6 +14,8 @@ class AppStrings {
   static const PHONE_NUMBER = 'Phone Number';
   static const CONFIRM_PASSWORD = 'Confirm Password';
   static const PASSWORD_DONT_MATCH = 'Passwords do not match';
+  static const REVIEW = 'Review';
+  static const MY_ORDERS = 'My Orders';
   static const WEAK_PASSWORD =
       'Password is weak, password should be at least 6 characters long';
   static const SIGN_IN_USER_NOT_FOUND_ERROR =

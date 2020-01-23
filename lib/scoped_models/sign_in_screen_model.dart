@@ -45,6 +45,7 @@ class SignInModel extends Model {
         Firestore.instance.collection('Users');
     var userData = await usersCollection.document(firebaseUser.uid).get();
     user = Users.fromJson(userData.data);
+
     notifyListeners();
   }
 
@@ -91,6 +92,7 @@ class SignInModel extends Model {
     isAuthenticating = true;
     await authService.signInWithGoogle(context);
     FirebaseUser user = await authService.getCurrentUser();
+    print(user.providerData);
     final CollectionReference usersCollection =
         Firestore.instance.collection('Users');
     await usersCollection.document(user.uid).setData({

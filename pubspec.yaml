@@ -24,15 +24,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   geolocator: ^5.1.5
-  location_permissions:
-  flare_flutter:
-  firebase_auth:
-  firebase_database:
-  google_sign_in:
+  location_permissions: ^2.0.4+1
+  flare_flutter: ^2.0.1
+  firebase_auth: ^0.15.3+1
+  firebase_database: ^3.1.1
+  google_sign_in: ^4.1.1
   scoped_model: ^1.0.1
-  cloud_firestore:
-  http:
-
+  cloud_firestore: ^0.13.0+1
+  http: ^0.12.0+4
+ 
 
 dev_dependencies:
   flutter_test:
@@ -54,12 +54,15 @@ flutter:
   assets:
     - assets/
   fonts:
-    - family: Avenir
+    - family: Montserrat
       fonts:
-        - asset: fonts/AvenirLTStd-Book.otf
-        - asset: fonts/AvenirLTStd-Medium.otf
-        - asset: fonts/AvenirLTStd-Roman.otf
-
+        - asset: fonts/Montserrat-Bold.ttf
+        - asset: fonts/Montserrat-ExtraLight.ttf
+        - asset: fonts/Montserrat-Light.ttf
+        - asset: fonts/Montserrat-Medium.ttf
+        - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Montserrat-Thin.ttf
+    
 
   #  - images/a_dot_ham.jpeg
 

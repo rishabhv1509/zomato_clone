@@ -60,6 +60,12 @@ class AuthenticationService extends BaseAuth {
         'email_id': email,
         'phone_no': phoneNumber,
         'profile_picture': ''
+      }).whenComplete(() async {
+        await usersCollection
+            .document(user.uid)
+            .collection('orders')
+            .document()
+            .setData({'data': 'fkbjhbk'});
       });
 
       return user.uid;

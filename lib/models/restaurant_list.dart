@@ -63,6 +63,7 @@ class Restaurant {
   int switchToOrderMenu;
   String cuisines;
   String timings;
+  int allReviewsCount;
   int averageCostForTwo;
   String currency;
   String thumb;
@@ -87,6 +88,7 @@ class Restaurant {
       this.currency,
       this.thumb,
       this.userRating,
+      this.allReviewsCount,
       this.photosUrl,
       this.menuUrl,
       this.featuredImage,
@@ -121,6 +123,7 @@ class Restaurant {
     deeplink = json['deeplink'];
     phoneNumbers = json['phone_numbers'];
     establishment = json['establishment'].cast<String>();
+    allReviewsCount = json['all_reviews_count'];
   }
 
   Map<String, dynamic> toJson() {

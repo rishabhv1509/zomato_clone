@@ -9,7 +9,7 @@ class Permissions {
         geolocationStatus == GeolocationStatus.disabled) {
       PermissionStatus permission =
           await LocationPermissions().requestPermissions();
-      print(permission);
+      // print(permission);
     }
   }
 }

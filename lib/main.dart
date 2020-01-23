@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:zomato_clone/screens/splash_screen.dart';
 import 'package:zomato_clone/utils/custom_colors.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   final CustomColors customColors = CustomColors();
@@ -10,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.amber, fontFamily: 'Avenir'),
+      theme: ThemeData(primarySwatch: Colors.amber, fontFamily: 'Montserrat'),
       // primarySwatch: Colors.amber),
       home: SplashScreen(),
     );
