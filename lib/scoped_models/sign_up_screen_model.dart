@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:zomato_clone/models/users.dart';
-import 'package:zomato_clone/screens/home_screen/home_screen.dart';
 import 'package:zomato_clone/services/authentication.dart';
 import 'package:zomato_clone/services/validation.dart';
-import 'package:zomato_clone/utils/strings.dart';
+import 'package:zomato_clone/utils/constants/route_names.dart';
+import 'package:zomato_clone/utils/constants/strings.dart';
 
 class SignUpModel extends Model {
   bool isEmailValid = true;
@@ -77,14 +77,9 @@ class SignUpModel extends Model {
         } else if (onValue == AppStrings.EMAIL_IS_BADLY_FORMATTED) {
           _scaffoldKey.currentState.showSnackBar(badlyFormattedEmail);
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                user: user,
-              ),
-            ),
-          );
+          Navigator.pushNamedAndRemoveUntil(
+              context, RouteNames.HOME_SCREEN, (Route<dynamic> route) => false,
+              arguments: user);
         }
       });
     }

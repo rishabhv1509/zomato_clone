@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:zomato_clone/models/users.dart';
-import 'package:zomato_clone/screens/login_screen/sign_in_screen.dart';
 import 'package:zomato_clone/services/authentication.dart';
-import 'package:zomato_clone/utils/images.dart';
-import 'package:zomato_clone/utils/strings.dart';
+import 'package:zomato_clone/utils/constants/route_names.dart';
+import 'package:zomato_clone/utils/constants/images.dart';
+import 'package:zomato_clone/utils/constants/strings.dart';
 import 'package:zomato_clone/utils/themes/themes_data.dart';
 
 class HomeScreenDrawer extends StatelessWidget {
@@ -25,10 +26,20 @@ class HomeScreenDrawer extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CircleAvatar(
-                      maxRadius: 20 * ThemesData.heightRatio,
-                      child: Image.network(user.profilePricture),
-                    )
+                    Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(80),
+                            ),
+                            border: Border.all(color: Colors.transparent),
+                            image: DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                  user.profilePricture),
+                            ),
+                            color: Colors.transparent),
+                        child: Container())
                   ],
                 ),
                 SizedBox(
@@ -61,24 +72,24 @@ class HomeScreenDrawer extends StatelessWidget {
             onTap: () {
               AuthenticationService _auth = AuthenticationService();
               _auth.signOut().whenComplete(() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignInScreen()));
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  RouteNames.SIGN_IN_SCREEN,
+                  (Route<dynamic> route) => false,
+                );
               });
             },
           ),
           ListTile(
-            leading: Image.asset(
-              AssetImages.ORDERS,
-              height: 24 * ThemesData.heightRatio,
-              width: 24 * ThemesData.widthRatio,
+            leading: Icon(
+              Icons.update,
+              size: 24 * ThemesData.heightRatio,
+              color: Colors.black,
             ),
-            title: Text(AppStrings.MY_ORDERS),
+            title: Text(AppStrings.UPDATE_USER_INFO),
             onTap: () {
-              AuthenticationService _auth = AuthenticationService();
-              _auth.signOut().whenComplete(() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignInScreen()));
-              });
+              Navigator.pushNamed(context, RouteNames.UPDATE_USER_INFO,
+                  arguments: user);
             },
           )
         ],

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:zomato_clone/scoped_models/sign_in_screen_model.dart';
-import 'package:zomato_clone/screens/login_screen/widgets/login_screen_buttons.dart';
-import 'package:zomato_clone/screens/sign_up_screen.dart';
+import 'package:zomato_clone/screens/sign_in_screen/widgets/login_screen_buttons.dart';
+import 'package:zomato_clone/utils/constants/images.dart';
+import 'package:zomato_clone/utils/constants/route_names.dart';
 import 'package:zomato_clone/utils/custom_colors.dart';
-import 'package:zomato_clone/utils/images.dart';
-import 'package:zomato_clone/utils/strings.dart';
+import 'package:zomato_clone/utils/constants/strings.dart';
 import 'package:zomato_clone/utils/themes/themes_data.dart';
 import 'package:zomato_clone/widgets/input_fields.dart';
 
@@ -158,11 +158,11 @@ class SignInScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              model.signInWithGoogle(context);
+                              model.signInWithGoogle(context, _scaffoldKey);
                             },
                             child: Center(
                                 child: Image.asset(
-                              'assets/google_logo.png',
+                              AssetImages.LOGO,
                               height: 30 * ThemesData.heightRatio,
                               width: 30 * ThemesData.widthRatio,
                             )),
@@ -172,12 +172,8 @@ class SignInScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpScreen(),
-                                ),
-                              );
+                              Navigator.pushNamed(
+                                  context, RouteNames.SIGN_UP_SCREEN);
                             },
                             child: Text(
                               AppStrings.SIGN_UP_PROMPT,

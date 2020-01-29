@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zomato_clone/models/restaurant_list.dart';
-import 'package:zomato_clone/screens/restaurant_details/restaurant_details.dart';
+import 'package:zomato_clone/screens/restaurant_details_screen/restaurant_details_screen.dart';
+import 'package:zomato_clone/utils/constants/route_names.dart';
 import 'package:zomato_clone/utils/themes/themes_data.dart';
 
 class ResturantCards extends StatelessWidget {
@@ -14,10 +15,8 @@ class ResturantCards extends StatelessWidget {
     // print(restaurant.photosUrl);
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          navigateToDetails(),
-        );
+        Navigator.pushNamed(context, RouteNames.RESTAURANT_DETAILS_SCREEN,
+            arguments: restaurant);
       },
       child: Padding(
         padding: EdgeInsets.only(
@@ -135,7 +134,7 @@ class ResturantCards extends StatelessWidget {
   Route navigateToDetails() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          RestaurantDetails(
+          RestaurantDetailsScreen(
         restaurant: restaurant,
       ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {

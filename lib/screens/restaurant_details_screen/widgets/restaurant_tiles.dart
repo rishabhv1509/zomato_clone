@@ -4,9 +4,17 @@ class RestaurantTiles extends StatefulWidget {
   final String image;
   final String itemName;
   final String itemPrice;
+  final Function increment;
+  final Function decrement;
   int total = 0;
   RestaurantTiles(
-      {Key key, this.image, this.itemName, this.itemPrice, this.total})
+      {Key key,
+      this.image,
+      this.itemName,
+      this.itemPrice,
+      this.total,
+      this.decrement,
+      this.increment})
       : super(key: key);
 
   @override
@@ -18,7 +26,6 @@ class _RestaurantTilesState extends State<RestaurantTiles> {
 
   @override
   Widget build(BuildContext context) {
-    print('total======>${widget.total}');
     return Container(
       child: ListTile(
         leading: Container(

@@ -1,38 +1,24 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import 'package:zomato_clone/models/restaurant_list.dart';
-import 'package:zomato_clone/screens/restaurant_details/widgets/restaurant_tiles.dart';
-import 'package:zomato_clone/utils/strings.dart';
+import 'package:zomato_clone/screens/restaurant_details_screen/widgets/restaurant_tiles.dart';
+import 'package:zomato_clone/utils/constants/strings.dart';
 import 'package:zomato_clone/utils/themes/themes_data.dart';
 
-class RestaurantDetails extends StatefulWidget {
+class RestaurantDetailsScreen extends StatefulWidget {
   final Restaurant restaurant;
 
-  RestaurantDetails({Key key, this.restaurant}) : super(key: key);
+  RestaurantDetailsScreen({Key key, this.restaurant}) : super(key: key);
 
   @override
   _RestaurantDetailsState createState() => _RestaurantDetailsState();
 }
 
-class _RestaurantDetailsState extends State<RestaurantDetails> {
+class _RestaurantDetailsState extends State<RestaurantDetailsScreen> {
   final _random = new Random();
   int temp = 0;
 
   int next(int min, int max) => min + _random.nextInt(max - min);
-
-  @override
-  void initState() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white, //top bar color
-      statusBarIconBrightness: Brightness.dark, //top bar icons
-      systemNavigationBarColor: Colors.transparent, //bottom bar color
-      systemNavigationBarIconBrightness: Brightness.dark, //bottom bar icons
-    ));
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,9 +86,6 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                           borderRadius: BorderRadius.all(Radius.circular(17)),
                           child: Container(
                             child: Card(
-                              // shape: RoundedRectangleBorder(
-                              //     borderRadius:
-                              //         BorderRadius.all(Radius.circular(20))),
                               elevation: 5,
                               child: Column(
                                 children: <Widget>[

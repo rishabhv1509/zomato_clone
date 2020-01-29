@@ -3,31 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:zomato_clone/models/users.dart';
-import 'package:zomato_clone/screens/home_screen/home_screen.dart';
-import 'package:zomato_clone/services/base_auth.dart';
+import 'package:zomato_clone/utils/constants/route_names.dart';
 
-class AuthenticationService extends BaseAuth {
+class AuthenticationService {
   FirebaseAuth _auth = FirebaseAuth.instance;
   Users user;
-  @override
+
   Future<FirebaseUser> getCurrentUser() async {
     FirebaseUser user = await _auth.currentUser();
     return user;
   }
 
-  @override
-  Future<bool> isEmailVerified() async {
-    FirebaseUser user = await _auth.currentUser();
-    return user.isEmailVerified;
-  }
-
-  @override
-  Future<void> sendEmailVerification() async {
-    FirebaseUser user = await _auth.currentUser();
-    user.sendEmailVerification();
-  }
-
-  @override
   Future<String> signIn(String userName, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
@@ -39,12 +25,10 @@ class AuthenticationService extends BaseAuth {
     }
   }
 
-  @override
   Future<void> signOut() {
     return _auth.signOut();
   }
 
-  @override
   Future<String> signUp(String email, String password, String firstName,
       String lastName, String phoneNumber) async {
     final CollectionReference usersCollection =
@@ -60,12 +44,6 @@ class AuthenticationService extends BaseAuth {
         'email_id': email,
         'phone_no': phoneNumber,
         'profile_picture': ''
-      }).whenComplete(() async {
-        await usersCollection
-            .document(user.uid)
-            .collection('orders')
-            .document()
-            .setData({'data': 'fkbjhbk'});
       });
 
       return user.uid;
@@ -87,27 +65,21 @@ class AuthenticationService extends BaseAuth {
     );
 
     final AuthResult authResult = await _auth.signInWithCredential(credential);
-    final FirebaseUser firebaseUser = authResult.user;
-
-    assert(!firebaseUser.isAnonymous);
-    assert(await firebaseUser.getIdToken() != null);
-
-    final FirebaseUser currentUser = await _auth.currentUser();
-    assert(firebaseUser.uid == currentUser.uid);
-    if (firebaseUser != null) {
+    final FirebaseUser fbuser = authResult.user;
+    if (fbuser != null) {
       final CollectionReference usersCollection =
           Firestore.instance.collection('Users');
-
-      var userData = await usersCollection.document(firebaseUser.uid).get();
+      await usersCollection.document(fbuser.uid).setData({
+        'first_name': fbuser.displayName,
+        'email_id': fbuser.email,
+        'profile_picture': fbuser.photoUrl
+      });
+      var userData = await usersCollection.document(fbuser.uid).get();
       user = Users.fromJson(userData.data);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(
-            user: user,
-          ),
-        ),
-      );
+      print(user.email);
+      Navigator.pushNamedAndRemoveUntil(
+          context, RouteNames.HOME_SCREEN, (Route<dynamic> route) => false,
+          arguments: user);
     }
 
     return 'signInWithGoogle succeeded: $user';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zomato_clone/screens/splash_screen.dart';
+import 'package:zomato_clone/routes/routes.dart';
+import 'package:zomato_clone/utils/constants/route_names.dart';
 import 'package:zomato_clone/utils/custom_colors.dart';
 
 void main() {
@@ -13,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.amber, fontFamily: 'Montserrat'),
-      // primarySwatch: Colors.amber),
-      home: SplashScreen(),
+      initialRoute: RouteNames.SPLASH_SCREEN,
+      onGenerateRoute: Routes.generateRoutes,
     );
   }
 }

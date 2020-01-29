@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
@@ -12,8 +13,8 @@ class ApiCalls {
           await http.get(url, headers: {'user-key': zomatoApiKey});
 
       return restaurantList;
-    } catch (error) {
-      return error;
+    } on SocketException {
+      throw SocketException('message');
     }
   }
 
@@ -23,7 +24,6 @@ class ApiCalls {
           'https://developers.zomato.com/api/v2.1/restaurant?res_id=$id';
       http.Response restaurantDetails =
           await http.get(url, headers: {'user-key': zomatoApiKey});
-      // print('details=========>${restaurantDetails.body}');
       return restaurantDetails;
     } catch (error) {
       return error;

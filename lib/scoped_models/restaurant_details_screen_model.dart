@@ -6,14 +6,14 @@ import 'package:zomato_clone/models/restaurant_details_model.dart';
 import 'package:zomato_clone/services/api_calls.dart';
 
 class RestaurantDetailsScreenModel extends Model {
-  int count = 0;
-  increment() {
+  // int count = 0;
+  increment(int count) {
     count++;
     notifyListeners();
-    return count;
+    // return count;
   }
 
-  decrement() {
+  decrement(int count) {
     if (count > 0) {
       count--;
       notifyListeners();
@@ -21,7 +21,7 @@ class RestaurantDetailsScreenModel extends Model {
       count = count;
       notifyListeners();
     }
-    return count;
+    // return count;
   }
 
   RestaurantDetailsModel details;

@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -19,14 +19,32 @@ class HomeScreenModel extends Model {
   Users user;
   RestaurantList restaurantList;
   TrendingRestaurantList trendingRestaurantList;
+  bool isInternet = true;
+  bool isLoading = false;
   getCurrentLocation() async {
     currentLocation = await locationService.getLocation();
     notifyListeners();
   }
 
   getrestaurantListFromApi(String location) async {
-    Response response = await apiCalls.getRestaurantList(location);
-    restaurantList = RestaurantList.fromJson(json.decode(response.body));
+    isLoading = true;
+
+    try {
+      var checkConnection = await Connectivity().checkConnectivity();
+      if (checkConnection == ConnectivityResult.none) {
+        isInternet = false;
+        // isLoading = false;
+        notifyListeners();
+      } else {
+        isInternet = true;
+        // isLoading = true;
+        Response response = await apiCalls.getRestaurantList(location);
+        restaurantList = RestaurantList.fromJson(json.decode(response.body));
+        // isLoading = false;
+        notifyListeners();
+      }
+    } on Exception {}
+    isLoading = false;
     notifyListeners();
   }
 
@@ -34,27 +52,36 @@ class HomeScreenModel extends Model {
     FirebaseUser firebaseUser = await _auth.getCurrentUser();
     final CollectionReference usersCollection =
         Firestore.instance.collection('Users');
-    print(
-        // 'usersCollection=====>${
-        usersCollection.getDocuments().then((onValue) => print));
-    // }');
+
     var userData = await usersCollection.document(firebaseUser.uid).get();
     user = Users.fromJson(userData.data);
     notifyListeners();
   }
 
   getTrendingListFromApi() async {
-    Response response = await apiCalls.getTrendingRestaurants(currentLocation);
-    trendingRestaurantList =
-        TrendingRestaurantList.fromJson(json.decode(response.body));
+    isLoading = true;
+    try {
+      // isLoading = true;
+      var checkConnection = await Connectivity().checkConnectivity();
+      if (checkConnection == ConnectivityResult.none) {
+        isInternet = false;
+        // isLoading = false;
+        notifyListeners();
+      } else {
+        isInternet = true;
+        // isLoading = true;
+        Response response =
+            await apiCalls.getTrendingRestaurants(currentLocation);
+        trendingRestaurantList =
+            TrendingRestaurantList.fromJson(json.decode(response.body));
+        print(trendingRestaurantList.collections);
+        // isLoading = false;
+        notifyListeners();
+      }
+    } catch (e) {}
+    isLoading = false;
     notifyListeners();
   }
-  // updateUserDetails()async{
-  //   FirebaseUser firebaseUser = await _auth.getCurrentUser();
-  //   final CollectionReference usersCollection =
-  //       Firestore.instance.collection('Users');
-  //       await usersCollection.document(firebaseUser.uid).updateData(data)
-  // }
 }
 
-HomeScreenModel homeScreenModel = HomeScreenModel();
+HomeScreenModel khomeScreenModel = HomeScreenModel();
