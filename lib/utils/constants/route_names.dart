@@ -5,4 +5,5 @@ class RouteNames {
   static const HOME_SCREEN = '/homeScreen';
   static const RESTAURANT_DETAILS_SCREEN = '/restaurantDetails';
   static const UPDATE_USER_INFO = '/updateUserInfo';
+  static const TEST = '/test';
 }

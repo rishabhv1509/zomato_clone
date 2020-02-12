@@ -16,6 +16,8 @@ class AppStrings {
   static const PASSWORD_DONT_MATCH = 'Passwords do not match';
   static const REVIEW = 'Review';
   static const MY_ORDERS = 'My Orders';
+  static const VIEW_CART = 'View Cart';
+  static const DELIVERY_AT = 'DELIVERY AT';
   static const UPDATE_USER_INFO = 'Update User Info';
   static const WEAK_PASSWORD =
       'Password is weak, password should be at least 6 characters long';

@@ -7,6 +7,7 @@ class AssetImages {
   static const PHONE = 'assets/phone.png';
   static const NAME = 'assets/name.png';
   static const ORDERS = 'assets/orders.png';
+  static const GOOGLE_LOGO = 'assets/google_logo.png';
   static const ITEM1 = 'assets/item1.png';
   static const ITEM2 = 'assets/item2.png';
   static const ITEM3 = 'assets/item3.png';

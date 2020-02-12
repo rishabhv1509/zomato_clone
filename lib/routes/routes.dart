@@ -12,6 +12,8 @@ class Routes {
     switch (settings.name) {
       case RouteNames.SPLASH_SCREEN:
         return MaterialPageRoute(builder: (_) => SplashScreen());
+      // case RouteNames.TEST:
+      //   return MaterialPageRoute(builder: (_) => TestScreen());
       case RouteNames.SIGN_IN_SCREEN:
         return MaterialPageRoute(builder: (_) => SignInScreen());
       case RouteNames.SIGN_UP_SCREEN:
@@ -40,9 +42,7 @@ class Routes {
             appBar: AppBar(
               title: Text('Error Page'),
             ),
-            body: Center(
-              child: Text('Error Page'),
-            ),
+            body: Center(child: Text('Error Page')),
           ),
         );
     }

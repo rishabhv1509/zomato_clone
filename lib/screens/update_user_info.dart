@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:zomato_clone/models/users.dart';
@@ -37,8 +36,7 @@ class UpdateUserInfoScrceen extends StatelessWidget {
                             ),
                             border: Border.all(color: Colors.transparent),
                             image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                    user.profilePricture)),
+                                image: NetworkImage(user.profilePricture)),
                             color: Colors.transparent),
                         child: Container(
                           child: FloatingActionButton(

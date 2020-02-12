@@ -57,7 +57,7 @@ class ResturantCards extends StatelessWidget {
                             child: Container(
                               child: Text(
                                 restaurant.name,
-                                style: ThemesData.restaurantNameStyle(),
+                                // style: ThemesData.restaurantNameStyle(),
                               ),
                               padding: EdgeInsets.only(
                                   left: 10 * ThemesData.widthRatio,
@@ -77,7 +77,7 @@ class ResturantCards extends StatelessWidget {
                               child: Text(
                                 restaurant.userRating.aggregateRating,
                                 textAlign: TextAlign.center,
-                                style: ThemesData.restaurantRatingStyle(),
+                                // style: ThemesData.restaurantRatingStyle(),
                               ),
                             ),
                             padding: EdgeInsets.all(4 * ThemesData.heightRatio),
@@ -97,7 +97,7 @@ class ResturantCards extends StatelessWidget {
                                   bottom: 3 * ThemesData.heightRatio),
                               child: Text(
                                 restaurant.cuisines,
-                                style: ThemesData.restaurantCuisineStyle(),
+                                // style: ThemesData.restaurantCuisineStyle(),
                               ),
                             ),
                           )
@@ -111,7 +111,7 @@ class ResturantCards extends StatelessWidget {
                           Container(
                             child: Text(
                               '${restaurant.currency} ${restaurant.averageCostForTwo.toString()} per person',
-                              style: ThemesData.restaurantCostStyle(),
+                              // style: ThemesData.restaurantCostStyle(),
                             ),
                             padding: EdgeInsets.only(
                                 left: 10 * ThemesData.widthRatio,

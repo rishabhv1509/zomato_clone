@@ -27,19 +27,19 @@ class _SplashScreenState extends State<SplashScreen>
 
     await permissions.getLocationPermission();
 
-    // AuthenticationService _authService = AuthenticationService();
+    AuthenticationService _authService = AuthenticationService();
 
-    // await _authService.getCurrentUser().then((fireBaseUser) {
-    //   if (fireBaseUser == null) {
-    //     Navigator.pushNamedAndRemoveUntil(
-    //         context, RouteNames.SIGN_IN_SCREEN, (Route<dynamic> route) => false,
-    //         arguments: user);
-    //   } else {
-    //     Navigator.pushNamedAndRemoveUntil(
-    //         context, RouteNames.HOME_SCREEN, (Route<dynamic> route) => false,
-    //         arguments: user);
-    //   }
-    // });
+    await _authService.getCurrentUser().then((fireBaseUser) {
+      if (fireBaseUser == null) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, RouteNames.SIGN_IN_SCREEN, (Route<dynamic> route) => false,
+            arguments: user);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, RouteNames.HOME_SCREEN, (Route<dynamic> route) => false,
+            arguments: user);
+      }
+    });
   }
 
   @override
@@ -125,12 +125,7 @@ class _SplashScreenState extends State<SplashScreen>
             width: animation.value,
             child: Container(),
           ),
-          offset: Offset(
-              // (animWidth.value == ThemesData.width / 4)
-              //     ? ltr.value
-              //     : animWidth.value,
-              animWidth.value,
-              animHeight.value),
+          offset: Offset(animWidth.value, animHeight.value),
         ),
       ),
     );

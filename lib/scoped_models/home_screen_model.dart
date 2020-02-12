@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:zomato_clone/models/restaurant_list.dart';
 import 'package:zomato_clone/models/restaurant_trending_list.dart';
 import 'package:zomato_clone/models/users.dart';
@@ -11,7 +11,7 @@ import 'package:zomato_clone/services/api_calls.dart';
 import 'package:zomato_clone/services/authentication.dart';
 import 'package:zomato_clone/services/get_location.dart';
 
-class HomeScreenModel extends Model {
+class HomeScreenModel extends ChangeNotifier {
   LocationService locationService = LocationService();
   AuthenticationService _auth = AuthenticationService();
   ApiCalls apiCalls = ApiCalls();
@@ -22,25 +22,32 @@ class HomeScreenModel extends Model {
   bool isInternet = true;
   bool isLoading = false;
   getCurrentLocation() async {
-    currentLocation = await locationService.getLocation();
-    notifyListeners();
+    var checkConnection = await Connectivity().checkConnectivity();
+    if (checkConnection == ConnectivityResult.none) {
+      isInternet = false;
+      notifyListeners();
+    } else {
+      currentLocation = await locationService.getLocation();
+      isInternet = true;
+      notifyListeners();
+    }
   }
 
-  getrestaurantListFromApi(String location) async {
+  getrestaurantListFromApi() async {
     isLoading = true;
 
     try {
       var checkConnection = await Connectivity().checkConnectivity();
       if (checkConnection == ConnectivityResult.none) {
         isInternet = false;
-        // isLoading = false;
         notifyListeners();
       } else {
         isInternet = true;
-        // isLoading = true;
-        Response response = await apiCalls.getRestaurantList(location);
+
+        Response response = await apiCalls.getRestaurantList(currentLocation);
         restaurantList = RestaurantList.fromJson(json.decode(response.body));
-        // isLoading = false;
+        // print(restaurantList.restaurants.length);
+
         notifyListeners();
       }
     } on Exception {}
@@ -55,33 +62,33 @@ class HomeScreenModel extends Model {
 
     var userData = await usersCollection.document(firebaseUser.uid).get();
     user = Users.fromJson(userData.data);
+    // print(user.email);
     notifyListeners();
   }
 
   getTrendingListFromApi() async {
-    isLoading = true;
+    // isLoading = true;
     try {
-      // isLoading = true;
       var checkConnection = await Connectivity().checkConnectivity();
       if (checkConnection == ConnectivityResult.none) {
         isInternet = false;
-        // isLoading = false;
+
         notifyListeners();
       } else {
         isInternet = true;
-        // isLoading = true;
+
         Response response =
             await apiCalls.getTrendingRestaurants(currentLocation);
         trendingRestaurantList =
             TrendingRestaurantList.fromJson(json.decode(response.body));
-        print(trendingRestaurantList.collections);
-        // isLoading = false;
+        // print(trendingRestaurantList.collections);
+
         notifyListeners();
       }
     } catch (e) {}
-    isLoading = false;
+    // isLoading = false;
     notifyListeners();
   }
 }
 
-HomeScreenModel khomeScreenModel = HomeScreenModel();
+// HomeScreenModel khomeScreenModel = HomeScreenModel();

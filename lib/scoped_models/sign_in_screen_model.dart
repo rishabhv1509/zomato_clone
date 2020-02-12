@@ -2,14 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:zomato_clone/models/users.dart';
 import 'package:zomato_clone/services/authentication.dart';
 import 'package:zomato_clone/services/validation.dart';
 import 'package:zomato_clone/utils/constants/route_names.dart';
 import 'package:zomato_clone/utils/constants/strings.dart';
 
-class SignInModel extends Model {
+class SignInModel extends ChangeNotifier {
   bool isEmailValid = true;
   bool isAuthenticating = false;
   bool isInternet = true;
@@ -116,5 +115,3 @@ class SignInModel extends Model {
     notifyListeners();
   }
 }
-
-SignInModel signInModel = SignInModel();

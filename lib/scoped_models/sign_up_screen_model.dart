@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:zomato_clone/models/users.dart';
 import 'package:zomato_clone/services/authentication.dart';
 import 'package:zomato_clone/services/validation.dart';
 import 'package:zomato_clone/utils/constants/route_names.dart';
 import 'package:zomato_clone/utils/constants/strings.dart';
 
-class SignUpModel extends Model {
+class SignUpModel extends ChangeNotifier {
   bool isEmailValid = true;
   bool isPasswordValid = true;
   bool isPasswordMatch = true;
@@ -86,5 +85,3 @@ class SignUpModel extends Model {
     notifyListeners();
   }
 }
-
-SignUpModel signUpModel = SignUpModel();

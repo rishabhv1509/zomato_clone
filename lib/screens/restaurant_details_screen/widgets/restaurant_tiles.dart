@@ -1,40 +1,39 @@
 import 'package:flutter/material.dart';
 
-class RestaurantTiles extends StatefulWidget {
+class RestaurantTiles extends StatelessWidget {
   final String image;
   final String itemName;
   final String itemPrice;
   final Function increment;
   final Function decrement;
-  int total = 0;
+  final int quantity;
   RestaurantTiles(
       {Key key,
       this.image,
       this.itemName,
       this.itemPrice,
-      this.total,
+      this.quantity,
       this.decrement,
       this.increment})
       : super(key: key);
 
-  @override
-  _RestaurantTilesState createState() => _RestaurantTilesState();
-}
-
-class _RestaurantTilesState extends State<RestaurantTiles> {
   int count = 0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
-        leading: Container(
-          height: 80,
-          width: 80,
-          child: Image.asset(widget.image),
-        ),
-        title: Text(widget.itemName),
-        subtitle: Text(widget.itemPrice),
+        leading: (image == null)
+            ? Container(
+                height: 0,
+                width: 0,
+              )
+            : Container(
+                height: 80,
+                width: 80,
+                child: Image.asset((image)),
+              ),
+        title: Text(itemName),
+        subtitle: Text(itemPrice),
         trailing: Container(
           width: 90,
           height: 30,
@@ -48,18 +47,7 @@ class _RestaurantTilesState extends State<RestaurantTiles> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      if (count > 0) {
-                        count--;
-                        widget.total = widget.total +
-                            (int.parse(widget.itemPrice.substring(3)) * count);
-                      } else {
-                        count = count;
-                        widget.total = widget.total +
-                            (int.parse(widget.itemPrice.substring(3)) * count);
-                      }
-                      print(count);
-                    });
+                    decrement();
                   },
                   child: Icon(
                     Icons.remove,
@@ -67,20 +55,18 @@ class _RestaurantTilesState extends State<RestaurantTiles> {
                   ),
                 ),
                 VerticalDivider(),
-                Text(count.toString(), style: TextStyle(fontSize: 10)),
+                Text(quantity.toString(),
+                    style: TextStyle(fontSize: 10, color: Colors.red)),
                 VerticalDivider(),
                 GestureDetector(
                     onTap: () {
-                      setState(() {
-                        count++;
-                        widget.total = widget.total +
-                            (int.parse(widget.itemPrice.substring(3)) * count);
-                        print(count);
-                      });
+                      increment();
+                      // print('========?${/}');
                     },
                     child: Icon(
                       Icons.add,
                       size: 10,
+                      color: Colors.black,
                     )),
               ],
             ),
